@@ -91,10 +91,6 @@ class budgetServices {
                 active : 0
             }, {
                 where : {idBudget : idBudget}
-            }).then(()=> {
-                await admCostmodel.destroy({where : {idBudget : idBudget}});
-                await resourcesModel.destroy({where : {idBudget : idBudget}});
-                await directCostmodel.destroy({where : {idBudget : idBudget}});
             });
         } catch (error) {
             console.log(error.message);
@@ -133,18 +129,20 @@ class budgetServices {
     }
 
 
-    static async addAwholeNewBudgetService(data){
+    static async addAwholeNewBudgetService(budget,data){
 
         try {
-            data.earnings.forEach(async (element)=>{await this.addnewEarningService(element)});
-            data.resources.forEach(async(element)=> {await this.addnewResourceService(element)});
-            data.admincost.forEach(async (element)=> {await this.addnewAdminCostService(element)});
-            data.directcost.forEach(async (element)=> {await this.addnewDirectCostService(element)});
+            data.earnings.forEach(async (element)=>{await this.addnewEarningService(budget,element)});
+            data.resources.forEach(async(element)=> {await this.addnewResourceService(budget,element)});
+            data.admincost.forEach(async (element)=> {await this.addnewAdminCostService(budget,element)});
+            data.directcost.forEach(async (element)=> {await this.addnewDirectCostService(budget,element)});
         } catch (error) {
             console.log(error.message);
             throw new Error('Error al agregar datos al presupuesto [budget.services.js]');
         }
     };
+
+
 
 };
 
