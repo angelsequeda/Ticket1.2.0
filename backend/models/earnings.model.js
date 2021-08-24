@@ -16,7 +16,10 @@ earningModel.init( {
         type: DataTypes.STRING,
         allowNull: false
     },
-
+    version :{
+        type : DataTypes.INTEGER,
+        allowNull :false
+    },
     month: {
         type: DataTypes.STRING,
         allowNull:false

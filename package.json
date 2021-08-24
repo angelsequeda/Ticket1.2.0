@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "security" : "node ./backend/services/security.services.js",
     "start": "nodemon --tls-min-v1.0 ./backend/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

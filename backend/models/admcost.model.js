@@ -11,7 +11,10 @@ admCostmodel.init( {
         allowNull: false,
 
     },
-
+    version :{
+        type : DataTypes.INTEGER,
+        allowNull :false
+    },
     concept: {
 
         type: DataTypes.STRING,

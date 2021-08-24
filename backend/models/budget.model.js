@@ -23,12 +23,14 @@ budgetModel.init( {
 
     version: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: true,
+        defaultValue : 1
     },
 
     active: {
-        type: DataTypes.INTEGER,
-        allowNull: false
+        type: DataTypes.BOOLEAN,
+        allowNull: true,
+        defaultValue : 1
     }
 
 }, {
