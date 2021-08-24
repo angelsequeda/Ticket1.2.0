@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/newbudget.css">
+    <title>Document</title>
+</head>
+<body class="container">
+    <select name="monthselect" id="monthselect" >
+        <option value="" selected disabled>Mes de inicio</option>
+        <option value="Febrero">Enero</option>
+        <option value="Marzo">Febrero</option>
+        <option value="Abril">Marzo</option>
+        <option value="Mayo">Abril</option>
+        <option value="Junio">Mayo</option>
+        <option value="Julio">Junio</option>
+        <option value="Agosto">Julio</option>
+        <option value="Septiembre">Agosto</option>
+        <option value="Octubre">Septiembre</option>
+        <option value="Noviembre">Octubre</option>
+        <option value="Diciembre">Noviembre</option>
+        <option value="Enero">Diciembre</option>
+    </select>
+    <!--CASH FLOW-->
+    <div class="cashflowcontainer">
+        <h2>Flujo de efectivo</h2>
+        <table class="table" id="cashflowtable">
+            <thead class="thead-dark">
+                <tr id="table1head" hidden>
+                    <th scope="col" class="column" id="table1concepthead">Concepto</th>
+                    <th scope="col" class="column" id="table1totalhead">Total</th>
+                </tr>
+            </thead>
+            <tbody class="tbody" id="table1body" hidden>
+                <tr id="rowingresostable1">
+                    <td>Ingresos</td>
+                    <td id="totalearningstable1"><input type="text" name="" id="totalearningstable1input" disabled value="0"></td>
+                </tr>
+                <tr id="rowegresostable1">
+                    <td>Egresos</td>
+                    <td id="totalexpensestable1"><input type="text" name="" id="totalexpesenstable1input" disabled value="0"></td>
+                </tr>
+                <tr id="table1totalfile">
+                    <td>Total</td>
+                    <td id="totaltotaltable1"><input type="text" name="" id="totaltotaltable1input" disabled value="0"></td>
+                </tr>
+                <tr id="rowegresostable1">
+                    <td>Acumulado</td>
+                    <td id="totalacumulatedtable1"><input type="text" name="" hidden id="totalacumulatedtable1input" disabled value="0"></td>
+                </tr>
+            </tbody>
+        </table>
+        <button type="button" class="btn btn-primary" id="addcolumntable1" hidden>Nuevo mes</button>
+    </div>
+    <!--EARNINGS-->
+    <div class="earningscontainer">
+        <h2>Ingresos</h2>
+        <table class="table" id="table2">
+            <thead class="thead-dark">
+                <tr id="table2head" hidden>
+                    <th scope="col" class="column" id="table2concepthead">Concepto</th>
+                    <th scope="col" class="column" id="table2totalhead">Total</th>
+                </tr>
+            </thead>
+            <tbody class="tbody" id="table2body" hidden>
+                <tr id="table2totalfile">
+                    <td>Total</td>
+                </tr>
+            </tbody>
+        </table>
+        <button type="button" class="btn btn-primary" id="addrowtable2" hidden>+</button>
+        <button type="button" class="btn btn-success" id="readytable2" hidden>Ready</button>
+        <button type="button" class="btn btn-danger" id="deletetable2" hidden>Eliminar</button>
+    </div>
+    <!--COST DIRECT-->
+    <div class="directcostcontainer">
+        <h2>Costos directos</h2>
+        <table class="table" id="directcosttable">
+            <thead class="thead-dark">
+                <tr id="table3head" hidden>
+                    <th scope="col" class="column" id="table3concepthead">Concepto</th>
+                    <th scope="col" class="column" id="table3totalhead">Total</th>
+                </tr>
+            </thead>
+            <tbody class="tbody" id="table3body" hidden>
+                <tr id="table3totalfile">
+                    <td>Total</td>
+                </tr>
+            </tbody>
+        </table>
+        <button type="button" class="btn btn-primary" id="addrowtable3" hidden>+</button>
+        <button type="button" class="btn btn-success" id="readytable3" hidden>Ready</button>
+        <button type="button" class="btn btn-danger" id="deletetable3" hidden>Eliminar</button>
+    </div>
+    <!--COST ADMIN-->
+    <div class="admincostcontainer">
+        <h2>Gastos administrativos</h2>
+        <table class="table" id="admincosttable" >
+            <thead class="thead-dark">
+                <tr id="table4head" hidden>
+                    <th scope="col" class="column" id="table4concepthead">Concepto</th>
+                    <th scope="col" class="column" id="table4totalhead">Total</th>
+                </tr>
+            </thead>
+            <tbody class="tbody" id="table4body" hidden>
+                <tr id="table4totalfile">
+                    <td>Total</td>
+                </tr>
+            </tbody>
+        </table>
+        <button type="button" class="btn btn-primary" id="addrowtable4" hidden>+</button>
+        <button type="button" class="btn btn-success" id="readytable4" hidden>Ready</button>
+        <button type="button" class="btn btn-danger" id="deletetable4" hidden>Eliminar</button>
+    </div>
+    <!--RESOURCES-->
+    <div class="resourcescontainer">
+        <h2>Recursos</h2>
+        <table class="table" id="resourcestable" >
+            <thead class="thead-dark" id="" >
+                <tr id="table5head" hidden>
+                    <th scope="col" class="column" id="table5concepthead">Concepto</th>
+                    <th scope="col" class="column" id="table5totalhead">Total</th>
+                </tr>
+            </thead>
+            <tbody class="tbody" id="table5body" hidden>
+                <tr id="table5totalfile">
+                    <td>Total</td>
+                </tr>
+            </tbody>
+        </table>
+        <button type="button" class="btn btn-primary" id="addrowtable5" hidden>+</button>
+        <button type="button" class="btn btn-success" id="readytable5" hidden>Ready</button>
+    </div>
+    <!--RESOURCES COST-->
+    <div class="resourcescostcontainer">
+        <h2>Costo de recursos</h2>
+        <table class="table" id="resourcescosttable" >
+            <thead class="thead-dark" id="" >
+                <tr id="table6head" hidden>
+                    <th scope="col" class="column" id="table6concepthead">Concepto</th>
+                    <th scope="col" class="column" id="table6totalhead">Total</th>
+                </tr>
+            </thead>
+            <tbody class="tbody" id="table6body" hidden>
+                <tr id="table6totalfile">
+                    <td>Total</td>
+                </tr>
+            </tbody>
+            
+        </table>
+    </div>
+    <!--RESOURCES/COST BALANCE-->
+    <div class="resourcescostbalancecontainer">
+        <h2>Resumen costos recursos</h2>
+        <table class="table" id="reosurcescostbalancetable">
+            <thead class="thead-dark" id="" >
+                <tr id="table7head" hidden>
+                    <th scope="col" class="column" id="table7concepthead">Concepto</th>
+                    <th scope="col" class="column" id="table7totalhead">Total</th>
+                </tr>
+            </thead>
+            <tbody class="tbody" id="table7body" hidden>
+                <tr id="table7totalfile">
+                    <td>Total</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!--RESULTS BALANCE-->
+    <div class="resultsbalancecontainer">
+        <h2>Estado de resultados</h2>
+        <table class="table" id="resultsbalancetable">
+            <thead class="thead-dark" id="" >
+                <tr id="table8head" hidden>
+                    <th scope="col" class="column" id="table8concepthead">Concepto</th>
+                    <th scope="col" class="column" id="table8totalhead">Total</th>
+                </tr>
+            </thead>
+            <tbody class="tbody" id="table8body" hidden>
+                <tr id="table8totalsales">
+                    <td>Ventas</td>
+                    <td id="totalsalestable8td"><input type="text" id="totalsalestable8" disabled></td>
+                </tr>
+                <tr id="table8totalcost">
+                    <td>Costos</td>
+                    <td id="totalcosttable8td"><input type="text" id="totalcosttable8" disabled></td>
+                </tr>
+                <tr id="table8totalmargin">
+                    <td>Margen</td>
+                    <td id="totalmargintable8td"><input type="text" id="totalmargintable8" disabled></td>
+                </tr>
+                <tr id="table8totalfile">
+                    <td>Saldo final</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!--RESUME-->
+    <div class="resultsbalancecontainer">
+        <h2>Resumen financiero</h2>
+        <table class="table" id="resumetable">
+            <thead class="thead-dark" id="" >
+                <tr id="table9head" hidden>
+                    <th scope="col" class="column" id="table9totalheads" >TOTALES</th>
+                </tr>
+            </thead>
+            <tbody class="tbody" id="table9body" hidden>
+                <tr>
+                    <th class="column" scope="col" id="containersells" >Ventas: <input id="resumesells" type="text" disabled ></th>
+                    <th class="column" scope="col" id="containercost" >Costos: <input id="resumecost" type="text" disabled></th>
+                    <th class="column" scope="col" id="containermargin" >Margen: <input id="resumemargin" type="text" disabled></th>
+                    <th class="column" scope="col" id="containerpercent" >%: <input id="resumepercent" type="text" disabled></th>
+                </tr>
+            </tbody>
+        </table>
+        <button class="btn btn-primary" id="buttonfinalsave" hidden>Guardar</button>
+        <button class="btn btn-danger" id="buttonfinalcancel" hidden>Cancelar</button>
+    </div>
+    <script src="../css/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../js/newbudget.interactions.2.0.js" type="module"></script>
+</body>
+</html>

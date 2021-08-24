@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/login.css">
+    <title>Log In </title>
+</head>
+<body class="login-page">
+  <div class="maindivision" style="margin-top: 200px;">
+    <!--TABS-->
+    <div class="tabsmenu">
+      <ul class="nav nav-tabs" style="border-bottom: 1px black solid;">
+        <li class="nav-item" id="navsesSta">
+          <a class="nav-link active" href="#" style="border:1px solid black; border-bottom: none;" id="startSession">Iniciar sesion</a>
+        </li>
+        <li class="nav-item" id="navregUs">
+          <a class="nav-link " href="#" style="border:1px solid black; border-bottom: none;" id="passwordChange" >Cambiar contraseña</a>
+        </li>
+        <li class="nav-item" id="navpassChange">
+          <a class="nav-link " href="#" style="border:1px solid black; border-bottom: none;" id="registerUser">Registrarse</a>
+        </li>
+      </ul>
+    </div>
+    <div class="seconddivision">
+      <!--LOGIN FORM-->
+      <div class="logindivision">
+        <form action="#" class="forms" autocomplete="off">
+          <div class="format-group">
+            <label for="usernameLogin" class="labels">Nombre de usuario</label>
+            <input type="text" class="format-control" placeholder="Nombre de usuario" id="usernameLogin">
+          </div>
+          <div class="format-group">
+            <label for="passwordLogin" class="labels">Contraseña</label>
+            <input type="password" class="format-control" placeholder="Nombre de usuario" id="passwordLogin">
+          </div>
+          <button class="btn btn-primary" id="startButton" style="margin-top: 10px;" type="button">Entrar</button>
+        </form>
+      </div>
+      <!--REGISTER FORM-->
+      <div class="registerdivision">
+        <label for="" class="labels"><h6>Para todos los datos se deben usar solo alfanumericos, evitar por favor usar signos, acentos u otros</h6></label>
+        <form action="" class="forms" autocomplete="off">
+          <div class="format-group">
+            <label for="firstname" class="labels">Primer nombre</label>
+            <input type="text" class="format-control" placeholder="Primer nombre" id="firstname">
+          </div>
+          <div class="format-group">
+            <label for="secondname" class="labels">Segundo nombre (opcional)</label>
+            <input type="text" class="format-control" placeholder="Segundo nombre" id="secondname">
+          </div>
+          <div class="format-group">
+            <label for="firstlastname" class="labels">Apellido paterno</label>
+            <input type="text" class="format-control" placeholder="Apellido paterno" id="firstlastname">
+          </div>
+          <div class="format-group">
+            <label for="secondlastname" class="labels">Apellido materno</label>
+            <input type="text" class="format-control" placeholder="Apellido materno" id="secondlastname">
+          </div>
+          <div class="format-group">
+            <label for="username" class="labels">Nombre de usuario</label>
+            <label for="username" class="labels"><h6>Debe contener solo alfanumericos y con un tamaño minimo de 5</h6></label>
+            <input type="text" class="format-control" placeholder="Nombre de usuario" id="username">
+          </div>
+          <div class="format-group">
+            <label for="mail" class="labels">E-mail</label>
+            <input type="email" class="format-control" placeholder="E-mail" id="mail">
+          </div>
+          <div class="format-group">
+            <label for="password" class="labels">Contraseña</label>
+            <label for="password" class="labels"><h6>Debe contener una mayuscula, una minuscula y un digito (sin signos)</h6></label>
+            <input type="password" class="format-control" placeholder="Contraseña" id="password">
+          </div>
+          <div class="format-group">
+            <label for="secondpassword" class="labels">Confirmar Contraseña</label>
+            <input type="password" class="format-control" placeholder="Confirmar Contraseña" id="secondpassword">
+          </div>
+          <div class="format-group">
+            <label for="companycode" class="labels">Código de empresa</label>
+            <input type="text" class="format-control" placeholder="Nombre de usuario" id="companycode">
+          </div>
+          <button class="btn btn-primary" id="registerButton" style="margin-top: 10px;" type="button">Registrar</button>
+        </form>
+      </div>
+      <!--CHANGER FORM-->
+      <div class="changerdivision">
+        <form action="" class="forms" autocomplete="off">
+          <div class="format-group">
+            <label for="usernameChanger" class="labels">Nombre de usuario</label>
+            <input type="text" class="format-control" placeholder="Nombre de usuario" id="usernameChanger">
+          </div>
+          <div class="format-group">
+            <label for="passwordChanger" class="labels">Contraseña</label>
+            <input type="password" class="format-control" placeholder="Contraseña" id="passwordChanger">
+          </div>
+          <div class="format-group">
+            <label for="newpass_word" class="labels">Nueva Contraseña</label>
+            <input type="password" class="format-control" placeholder="Primer nombre" id="newpass_word">
+          </div>
+          <button class="btn btn-primary" id="changerButton" style="margin-top: 10px;" type="button">Cambiar</button>
+          <button class="btn btn-primary" id="cancelButton" style="margin-top: 10px; margin-left: 5px;" type="button">Cancelar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <script src="../js/jquery-3.6.0.min.js"></script>
+  <script src="../js/login.interactions.js" type="text/javascript"></script>
+  <script src="../js/login.js" type="module"></script>
+  <script src="../css/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>
