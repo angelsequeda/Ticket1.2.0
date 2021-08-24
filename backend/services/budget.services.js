@@ -19,7 +19,7 @@ class budgetServices {
             })
         } catch (error) {
             console.log(error.message);
-            throw new Error('Error al crear ganancia [budget.services.js]');
+            throw new Error('Error al crear ganancia [addearning]');
         }
     }
     static async addnewBudgetService(project){
@@ -27,13 +27,13 @@ class budgetServices {
             let id = randomNamesServices.givmeTodayNormal()+randomNamesServices.giveMeArandomChain(10);
             await budgetModel.create({
                 idBudget : id,
-                crated : randomNamesServices.givemeTodayDateISO(),
+                created : randomNamesServices.givemeTodayDateISO(),
                 project : project,
             });
             return id;
         } catch (error) {
             console.log(error.message);
-            throw new Error('Error en nuevo presupuesto [budget.services.js]');
+            throw new Error('Error en nuevo presupuesto [addnewbudget]');
         }
     };
 
@@ -48,7 +48,7 @@ class budgetServices {
             })
         } catch (error) {
             console.log(error.message);
-            throw new Error('Error en nuevo costo administrativo[budget.services.js]')
+            throw new Error('Error en nuevo costo administrativo[admincost]')
         }
     };
 
@@ -60,11 +60,11 @@ class budgetServices {
                 concept : directCost.concept,
                 total : directCost.total,
                 month : directCost.month,
-                version : budget.idBudget
+                version : budget.version
             })
         } catch (error) {
             console.log(error.message);
-            throw new Error('Error en nuevo costo directo [budget.services.js]');
+            throw new Error('Error en nuevo costo directo [adddirect]');
         }
     };
 
@@ -80,7 +80,7 @@ class budgetServices {
             })
         } catch (error) {
             console.log(eror.message);
-            throw new Error('Error en nuevo recurso [budget.services.js]');
+            throw new Error('Error en nuevo recurso [addresources]');
         }
     };
 
@@ -94,37 +94,45 @@ class budgetServices {
             });
         } catch (error) {
             console.log(error.message);
-            throw new Error('Error al eliminar presupuesto [budget.services.js]');
+            throw new Error('Error al eliminar presupuesto [deletebudget]');
         }
     };
 
-    static async updateBudgetService(idBudget){
+    static async updateBudgetService(budget){
         
         try {
-            let version = await budgetModel.findOne({where : { idBudget : idBudget},attributes : {version}});
+            let version = await budgetModel.findOne({where : { idBudget : budget.idBudget},attributes : ['version']});
             await budgetModel.update({
-                version : version
+                version : version.version + 1
             }, {
                 where : {
-                    idBudget : idBudget
+                    idBudget : budget.idBudget
                 }
             });
+            budget.version  = version.version+1;
         } catch (error) {
             console.log(error.message);
-            throw new Error('Error al actualizar version del presupuesto [budget.services.js]');
+            throw new Error('Error al actualizar version del presupuesto [updatebudget]');
         }
     }
 
-    static async getBudgetDataService(budget){
+    static async getBudgetDataService(idBudget){
 
         try {
-            let budget = await budgetModel.findOne({where : {idBudget : budget.idBudget, active : 1}});
-            let adminCost = await admCostmodel.findAll({where : {idBudget : budget.idBudget, version : budget.version}});
-            let directCost = await directCostmodel.findAll({where :{idBudget : budget.idBudget, version : budget.version}});
-            let resources = await resourcesModel.findAll({where : {idBudget : budget.idBudget, version : budget.version}});
-            return {budget,adminCost,directCost,resources}
-        } catch (error) {
+            let budget = await budgetModel.findOne({where : {idBudget : idBudget, active : 1},attributes:{exclude:['active']}});
+            if(budget){
+                let earnings = await earningModel.findAll({where : {idBudget : budget.idBudget, version : budget.version},attributes:{exclude:['id','idBudget','version']}});
+                let adminCost = await admCostmodel.findAll({where : {idBudget : budget.idBudget, version : budget.version},attributes:{exclude:['id','idBudget','version']}});
+                let directCost = await directCostmodel.findAll({where :{idBudget : budget.idBudget, version : budget.version},attributes:{exclude:['id','idBudget','version']}});
+                let resources = await resourcesModel.findAll({where : {idBudget : budget.idBudget, version : budget.version},attributes:{exclude:['id','idBudget','version']}});
+                return {budget,adminCost,directCost,resources,earnings}
+            }else{
+                throw new Error('El budget no existe');
+            }
             
+        } catch (error) {
+            console.log(error.message);
+            throw new Error('[getbudget]')
         }
     }
 
@@ -138,7 +146,7 @@ class budgetServices {
             data.directcost.forEach(async (element)=> {await this.addnewDirectCostService(budget,element)});
         } catch (error) {
             console.log(error.message);
-            throw new Error('Error al agregar datos al presupuesto [budget.services.js]');
+            throw new Error('[addwhole]');
         }
     };
 
@@ -146,3 +154,4 @@ class budgetServices {
 
 };
 
+module.exports = budgetServices;

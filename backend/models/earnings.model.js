@@ -33,7 +33,7 @@ earningModel.init( {
 {
     sequelize,
     modelName: 'Earnings',
-    tableName: 'INGRESOS',
+    tableName: 'EARNINGS',
     timestamps: false,
     createdAt: false,
     updatedAt: false

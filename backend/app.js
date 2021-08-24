@@ -2,6 +2,8 @@ const express = require('express');
 app = express();
 const cors = require('cors');
 const sequelize = require('./db/connection');
+const budgetRoutes = require('./routes/budgets.routes');
+const userRoutes = require('./routes/users.routes');
 require('dotenv').config();
 
 //Middlewares globales
@@ -23,3 +25,6 @@ app.listen(process.env.port, async ()=> {
     
 });
 
+//Las rutas del servidor
+app.use(budgetRoutes);
+app.use(userRoutes)

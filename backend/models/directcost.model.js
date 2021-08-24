@@ -33,7 +33,7 @@ directCostmodel.init( {
 {
     sequelize,
     modelName: 'Directcost',
-    tableName: 'COSTOSDIRECTOS',
+    tableName: 'DIRECTCOST',
     timestamps: false,
     createdAt: false,
     updatedAt: false

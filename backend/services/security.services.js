@@ -4,8 +4,8 @@ const bcrypt = require('bcrypt');
 
 class jsonwebtokenServices{
 
-    static encryptToken(username){
-        let token = jsonwebtoken.sign(username,process.env.tokensignature);
+    static encryptToken(iduser,username){
+        let token = jsonwebtoken.sign({iduser:iduser,username:username},process.env.tokensignature);
         return token;
     }
 

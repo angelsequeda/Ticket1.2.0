@@ -34,7 +34,7 @@ admCostmodel.init( {
 {
     sequelize,
     modelName: 'admCost',
-    tableName: 'GASTOSADMINISTRATIVOS',
+    tableName: 'ADMINCOST',
     timestamps: false,
     createdAt: false,
     updatedAt: false

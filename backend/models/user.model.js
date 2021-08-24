@@ -4,6 +4,10 @@ const sequelize = require('../db/connection')
 
 userModel.init({
 
+    idUser : {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
     firstname: {
         type: DataTypes.STRING,
         allowNull:false
@@ -41,13 +45,14 @@ userModel.init({
     },
 
     active : {
-        type: DataTypes.INTEGER,
-        allowNull: false
+        type: DataTypes.BOOLEAN,
+        allowNull: true,
+        defaultValue : 1 
     }
 }, {
     sequelize,
     modelName: 'User',
-    tableName: 'USUARIOS',
+    tableName: 'USERS',
     timestamps: false,
     createdAt: false,
     updatedAt: false

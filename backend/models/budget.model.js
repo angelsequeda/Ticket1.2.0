@@ -4,7 +4,11 @@ const sequelize = require('../db/connection');
 class budgetModel extends Model {};
 
 budgetModel.init( {
-
+    id:{
+        type:DataTypes.INTEGER,
+        allowNull:false,
+        autoIncrement:true
+    },
     idBudget: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -12,7 +16,7 @@ budgetModel.init( {
     },
 
     created : {
-        type: DataTypes.DATE,
+        type: DataTypes.DATEONLY,
         allowNull: false
     },
 
@@ -36,7 +40,7 @@ budgetModel.init( {
 }, {
     sequelize,
     modelName: 'Budget',
-    tableName: 'INDEXPRESUPUESTOS',
+    tableName: 'BUDGETS',
     timestamps: false,
     createdAt: false,
     updatedAt: false

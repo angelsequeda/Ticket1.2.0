@@ -37,8 +37,7 @@ resourcesModel.init( {
 },
 {
     sequelize,
-    modelName: 'Rersources',
-    tableName: 'RECURSOS',
+    tableName: 'RESOURCES',
     timestamps: false,
     createdAt: false,
     updatedAt: false
