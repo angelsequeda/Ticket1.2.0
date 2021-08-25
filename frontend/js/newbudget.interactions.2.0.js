@@ -32,6 +32,7 @@ document.getElementById('monthselect').addEventListener('change',()=> {
     document.getElementById("deletetable2").hidden = false;
     document.getElementById("deletetable3").hidden = false;
     document.getElementById("deletetable4").hidden = false;
+    document.getElementById("deletetable5").hidden = false;
     document.getElementById("buttonfinalsave").hidden = false;
     document.getElementById("buttonfinalcancel").hidden = false;
 
@@ -110,6 +111,8 @@ document.getElementById(`deletetable4`).addEventListener('click',()=> {
     rowsinAdmincost-=1;
     
 })
+
+
 document.getElementById("addrowtable5").addEventListener("click", ()=> {
 
     rowsinresources +=1 ;
@@ -117,6 +120,14 @@ document.getElementById("addrowtable5").addEventListener("click", ()=> {
     
 })
 
+document.getElementById('deletetable5').addEventListener('click',()=>{
+
+    document.getElementById(`resourcesrow${rowsinresources}`).remove();
+    document.getElementById(`resourcecostrow${rowsinresources}`).remove();
+    document.getElementById(`resoucebalancerow${rowsinresources}`).remove();
+    rowsinresources-=1;
+    functionsButtons.buttonacceptresources(rowsinresources,num);
+})
 
 document.getElementById(`readytable2`).addEventListener('click', ()=> {
     functionsButtons.buttonsacceptearnings(rowsinEarnings,num);

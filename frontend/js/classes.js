@@ -1,3 +1,4 @@
+import {frontValidations} from './index.js'
 export class User { 
 
     constructor(data){
@@ -84,67 +85,34 @@ export class User {
 
 
 
-export class Budget {
-    constructor(data){
-        this.id = data.id
+export class Budget{
+    constructor(project){
+        this.budget = {project : project},
+        this.data = {directcost:[],admincost:[],resources:[],earnings:[]}
     }
 
-    static async searchAllBudgets() {
+    addNewDirectcost(concept,total,month){
+        this.data.directcost.push({concept,total,month});
+    };
 
-        let result =  await fetch("http://localhost:3000/budgets/consult", {
-            method: 'GET',
-        });
-        return result.json();
 
-    }
-    async searchForBudget() {
-
-        let result =  await fetch("http://localhost:3000/budgets/consultone", {
-            method: 'POST',
-            headers: {
-                "Accept": "application/json, text/plain, */*",
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                id_presupuesto: this.id
-            })
-        });
-        return result.json();
-
+    addNewAdmincost(concept,total,month){
+        if(typeof concept === 'string' && typeof total === "number" && typeof month === "string"){
+            this.data.admincost.push({concept,total,month});
+        }else{
+            throw new Error('Datos no permitidos');
+        }
     }
 
-    async addInfoBudget(budget, earnings,directcost,admincost,resources) {
-
-        let result = await fetch("http://localhost:3000/budgets/addnew", {
-            method: 'POST',
-            headers: {
-                "Accept": "application/json, text/plain, */*",
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify( {
-                budget: budget,
-                earnings: earnings,
-                directcost: directcost,
-                admincost: admincost,
-                resources: resources
-            })
-        });
-
-        return result.json();
+    addNewEarning(concept,total,month){
+        if(typeof concept === 'string' && typeof total === "number" && typeof month === "string"){
+            this.data.earnings.push({concept,total,month});
+        }else{
+            throw new Error('Datos no permitidos');
+        }
     }
 
-    async deleteBudget() {
-        let result =  await fetch("http://localhost:3000/budgets/delete",{
-            method:'POST',
-            headers: {
-                "Accept": "application/json, text/plain, */*",
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                id_presupuesto: this.id
-            })
-        });
-        
-        return result.json();
+    addNewResource(concept,cost,porcentaje,month){
+        this.data.resources.push({concept,cost,porcentaje,month})
     }
 }

@@ -5,7 +5,6 @@ class budgetControllers{
     static async addnewBudgetController(req,res){
         try {
             let result = await budgetServices.addnewBudgetService(req.body.budget.project);
-            console.log(req.body.data);
             await budgetServices.addAwholeNewBudgetService({idBudget:result,version:1},req.body.data);
             return res.status(200).json({status :200, result : result});
         } catch (error) {
