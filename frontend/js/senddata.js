@@ -24,10 +24,37 @@ export class API{
                 "Accept": "application/json, text/plain, */*",
                 "Content-Type": "application/json"
             },
-            body : {
-                user
-            }
+            body : JSON.stringify({
+                user : user
+            })
         });
         return result.json();
+    }
+
+    async changePassword(user){
+        let result = await fetch(this.address+'/users',{
+            method : 'PUT',
+            headers : {
+                "Accept": "application/json, text/plain, */*",
+                "Content-Type": "application/json",
+                "Authorization" : user.token
+            },
+            body : JSON.stringify({
+                user : {idUser : user.idUser,pass_word : user.pass_word, username : user.username}
+            })
+        });
+        return result.json();
+    };
+
+    async getAllBudgets(token){
+        let result = await fetch(this.address+'/budgets/all',{
+            method : 'GET',
+            headers : {
+                "Accept": "application/json, text/plain, */*",
+                "Content-Type": "application/json",
+                "Authorization" : token
+            },
+        });
+        return result.json()
     }
 }

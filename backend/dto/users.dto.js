@@ -2,7 +2,7 @@ const Joi = require("joi");
 
 const userForRegisterDTO = Joi.object({
     firstname : Joi.string().alphanum().required(),
-    secondname : Joi.string().alphanum(),
+    secondname : Joi.string().alphanum().allow(null,''),
     firstlastname : Joi.string().alphanum().required(),
     secondlastname : Joi.string().alphanum().required(),
     mail : Joi.string().email().required(),
@@ -12,7 +12,8 @@ const userForRegisterDTO = Joi.object({
 
 const userForLoginDTO = Joi.object({
     username : Joi.string().alphanum().required().min(5).max(8),
-    pass_word : Joi.string().pattern(new RegExp("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{0,1000}$")).min(5).max(10).required()
+    pass_word : Joi.string().pattern(new RegExp("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{0,1000}$")).min(5).max(10).required(),
+    idUser : Joi.string().allow(null,"")
 });
 
 module.exports = {userForLoginDTO,userForRegisterDTO}

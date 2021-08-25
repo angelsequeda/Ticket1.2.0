@@ -44,6 +44,17 @@ class budgetControllers{
             console.log(error.message);
             return res.status(500).json({status:500,message : 'error'});
         }
+    };
+
+
+    static async getAllBudgetsController(req,res){
+        try {
+            let result = await budgetServices.getAllBudgetsService();
+            return res.status(200).json({status : 200, result : result});
+        } catch (error) {
+            console.log(error.message);
+            return res.status(500).json({status:500,message : 'error'});
+        }
     }
 };
 

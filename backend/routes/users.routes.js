@@ -5,7 +5,7 @@ let userRoutes = require('express').Router();
 
 userRoutes.get('/users',userMiddlewares.areYouThisUser,userControllers.getUserController);
 userRoutes.post('/users',userMiddlewares.isUserForRegisterOk,userMiddlewares.doesUserForRegistrationExist,userControllers.addNewUserController);
-userRoutes.put('/users',userControllers.updateUserController);
+userRoutes.put('/users',userMiddlewares.areYouThisUser,userMiddlewares.isUserForLoginOk,userControllers.updateUserController);
 userRoutes.delete('/users',userControllers.deleteUserController);
 userRoutes.post('/login',userMiddlewares.isUserForLoginOk,userMiddlewares.doesUserForLoginExist,userControllers.loginController);
 

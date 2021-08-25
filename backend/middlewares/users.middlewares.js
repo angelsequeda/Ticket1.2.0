@@ -16,12 +16,14 @@ class userMiddlewares{
     };
 
     static isUserForLoginOk(req,res,next){
+        console.log(req.body.user);
+
         try {
             Joi.attempt(req.body.user,userForLoginDTO);
             next();
         } catch (error) {
             console.log(error.message);
-            return res.status(409).json({status : 409, message :'Hay algo mal con el formato de login'});
+            return res.status(409).json({status : 409, message :'Hay algo mal'});
         }
     };
 

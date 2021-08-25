@@ -151,6 +151,16 @@ class budgetServices {
     };
 
 
+    static async getAllBudgetsService(){
+        try {
+            let result = await budgetModel.findAll();
+            return result;
+        } catch (error) {
+            console.log(error.message);
+            throw new Error('[getallBudgets]');
+        }
+    }
+
 
 };
 
