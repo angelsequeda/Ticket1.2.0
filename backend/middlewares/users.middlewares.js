@@ -29,7 +29,7 @@ class userMiddlewares{
         try {
             let userExistUsername = await usersServices.getuserbyCriteria({username : req.body.user.username});
             let userExistMail = await usersServices.getuserbyCriteria({mail : req.body.user.mail});
-            if(userExistMail){
+            if(userExistUsername){
                 return res.status(409).json({status : 409, message : 'Nombre de usuario ya ocupado'});
             }else if(userExistMail){
                 return res.status(409).json({status : 409, message : 'Mail ya utilizado'});

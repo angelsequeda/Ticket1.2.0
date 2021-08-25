@@ -34,7 +34,6 @@ export class frontValidations {
 
         if( !data.username || !data.pass_word) {
 
-            alert('Falta usuario o contraseña');
             return false;
 
         } else {
