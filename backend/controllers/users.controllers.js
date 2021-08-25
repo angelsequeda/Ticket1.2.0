@@ -25,6 +25,7 @@ class userControllers{
     static async getUserController(req,res){
         try {
             let result = await usersServices.getuserbyCriteria({idUser:req.query.idUser});
+            result.pass_word = "";
             return res.status(200).json({status : 200, result : result});
         } catch (error) {
             console.log(error.message);
