@@ -24,8 +24,8 @@ class userControllers{
 
     static async getUserController(req,res){
         try {
-            await usersServices.getuserbyCriteria({idUser:req.query.idUser});
-            return res.status(200).json({status : 200, message : 'correcto'});
+            let result = await usersServices.getuserbyCriteria({idUser:req.query.idUser});
+            return res.status(200).json({status : 200, result : result});
         } catch (error) {
             console.log(error.message);
             return res.status(500).json({status:500, message : 'error'});
@@ -41,6 +41,16 @@ class userControllers{
             return res.status(500).json({status:500, message : 'error'});
         }
     };
+
+    static async loginController(req,res){
+        try {
+            let token = usersServices.giveToken(req.body.user);
+            return res.status(200).json({status : 200, result : token});
+        } catch (error) {
+            console.log(error.message);
+            return res.status(500).json({status : 500, message : 'error'});
+        }
+    }
 }
 
 

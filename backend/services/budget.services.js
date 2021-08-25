@@ -75,7 +75,7 @@ class budgetServices {
                 idBudget : budget.idBudget,
                 cost : resource.cost,
                 concept : resource.concept,
-                porcetaje : resource.porcetaje,
+                porcentaje : resource.porcentaje,
                 version : budget.version
             })
         } catch (error) {

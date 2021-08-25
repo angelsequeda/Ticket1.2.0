@@ -11,6 +11,7 @@ class jsonwebtokenServices{
 
     static decryptToken(token){
         let tokenUncrypted = jsonwebtoken.verify(token,process.env.tokensignature);
+        return tokenUncrypted;
     }
 
 };

@@ -1,5 +1,5 @@
 const userModel = require("../models/user.model");
-const { randomNamesServices } = require("./security.services");
+const { randomNamesServices, passwordServices, jsonwebtokenServices } = require("./security.services");
 
 class usersServices{
 
@@ -14,9 +14,10 @@ class usersServices{
                 firstlastname : user.firstlastname,
                 secondlastname : user.secondlastname,
                 mail : user.mail,
-                pass_word : user.pass_word
+                username:user.username,
+                pass_word : passwordServices.encryptPassword(user.pass_word)
             });
-            return {iduser : code, username : user.username};
+            return {idUser : code, username : user.username};
         } catch (error) {
             console.log(error.message);
             throw new Error('[addnewuser]');
@@ -28,10 +29,9 @@ class usersServices{
 
         try {
             await userModel.update({
-                mail : user.mail,
-                pass_word : user.pass_word
+                pass_word : passwordServices.encryptPassword(user.pass_word)
             },{
-                where : {iduser : user.iduser}
+                where : {idUser : user.idUser}
             });
         } catch (error) {
             console.log(error.message);
@@ -45,7 +45,9 @@ class usersServices{
             Object.keys(criteria).forEach((element)=> {
                 criteriaDefault[element] = criteria[element];
             });
-            let result = await userModel.findOne({where: criteriaDefault,attributes:{exclude:['active','id']}})
+            
+            let result = await userModel.findOne({where: criteriaDefault,attributes:{exclude:['active','id','pass_word']},});
+            return result;
         } catch (error) {
             console.log(error.message);
             throw new Error('[getuserCriteria]');
@@ -60,6 +62,16 @@ class usersServices{
         } catch (error) {
             console.log(error.message);
             throw new Error('[deleteUser]');
+        }
+    };
+
+    static giveToken(user){
+        try {
+            let token = jsonwebtokenServices.encryptToken(user.idUser,user.username);
+            return token;
+        } catch (error) {
+            console.log(error.message);
+            throw new Error('[giveToken]');
         }
     }
 };
