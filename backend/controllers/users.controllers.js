@@ -44,7 +44,7 @@ class userControllers{
 
     static async loginController(req,res){
         try {
-            let token = usersServices.giveToken(req.body.user);
+            let token = await usersServices.giveToken(req.body.user);
             return res.status(200).json({status : 200, result : token});
         } catch (error) {
             console.log(error.message);

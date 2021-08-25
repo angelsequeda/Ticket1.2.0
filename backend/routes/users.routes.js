@@ -4,9 +4,9 @@ const userMiddlewares = require('../middlewares/users.middlewares');
 let userRoutes = require('express').Router();
 
 userRoutes.get('/users',userMiddlewares.areYouThisUser,userControllers.getUserController);
-userRoutes.post('/users',userControllers.addNewUserController);
+userRoutes.post('/users',userMiddlewares.isUserForRegisterOk,userControllers.addNewUserController);
 userRoutes.put('/users',userControllers.updateUserController);
 userRoutes.delete('/users',userControllers.deleteUserController);
-userRoutes.post('/login',userControllers.loginController);
+userRoutes.post('/login',userMiddlewares.isUserForLoginOk,userMiddlewares.doesUserForLoginExist,userControllers.loginController);
 
 module.exports = userRoutes;

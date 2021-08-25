@@ -46,7 +46,7 @@ class usersServices{
                 criteriaDefault[element] = criteria[element];
             });
             
-            let result = await userModel.findOne({where: criteriaDefault,attributes:{exclude:['active','id','pass_word']},});
+            let result = await userModel.findOne({where: criteriaDefault,attributes:{exclude:['active','id']},});
             return result;
         } catch (error) {
             console.log(error.message);
@@ -65,10 +65,11 @@ class usersServices{
         }
     };
 
-    static giveToken(user){
+    static async giveToken(user){
         try {
-            let token = jsonwebtokenServices.encryptToken(user.idUser,user.username);
-            return token;
+            let userFound = await this.getuserbyCriteria({username : user.username});
+            let token = jsonwebtokenServices.encryptToken(userFound.idUser,userFound.username);
+            return {idUser : userFound.idUser,username : userFound.username, token:token};
         } catch (error) {
             console.log(error.message);
             throw new Error('[giveToken]');

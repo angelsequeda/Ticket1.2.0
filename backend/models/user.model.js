@@ -35,8 +35,7 @@ userModel.init({
 
     username: {
         type: DataTypes.STRING,
-        allowNull:false,
-        primaryKey: true
+        allowNull:false
     },
 
     pass_word: {

@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt');
 class jsonwebtokenServices{
 
     static encryptToken(iduser,username){
-        let token = jsonwebtoken.sign({iduser:iduser,username:username},process.env.tokensignature);
+        let token = jsonwebtoken.sign({idUser:iduser,username:username},process.env.tokensignature);
         return token;
     }
 
@@ -45,7 +45,7 @@ class passwordServices{
     }
 
     static validatePassword(password,passwordEncrypted) {
-        let originalPassword = bcrypt.compare(password,password);
+        let originalPassword = bcrypt.compareSync(password,passwordEncrypted);
         return originalPassword;
     }
 };

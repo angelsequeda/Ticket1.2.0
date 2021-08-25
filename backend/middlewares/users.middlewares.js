@@ -45,7 +45,7 @@ class userMiddlewares{
     static async doesUserForLoginExist(req,res,next){
         try {
             let userExistUsername = await usersServices.getuserbyCriteria({username : req.body.user.username});
-            if(userExistUsername && req.body.user.pass_word === passwordServices.validatePassword(userExistUsername.result.password)){
+            if(passwordServices.validatePassword(req.body.user.pass_word,userExistUsername.pass_word)){
                 next();
             }else{
                 return res.status(409).json({status : 409, message : 'Usuario o contraseña incorrectos'});
@@ -59,12 +59,12 @@ class userMiddlewares{
     static async areYouThisUser(req,res,next){
         try {
             let tokenreceived = jsonwebtokenServices.decryptToken(req.headers.authorization);
-            if(req.query.idUser && tokenreceived.iduser === req.query.idUser){
+            if(req.query.idUser && tokenreceived.idUser === req.query.idUser){
                 next();
-            }else if(req.body.user.idUser && req.body.user.idUser === tokenreceived.iduser){
+            }else if(req.body.user && tokenreceived.idUser === req.body.user.idUser){
                 next();
             }else{
-                return res.status(409).json({status : 409, message : 'Usted no es propietario de esta cuenta'}); 
+                return res.status(409).json({status : 409, message : 'Usuario no corresponde'});
             }
         } catch (error) {
             console.log(error.message);
