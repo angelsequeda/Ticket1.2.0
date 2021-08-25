@@ -437,7 +437,7 @@ export class functionsButtons {
 
    
     
-
+/*
     static async saveEverythingandrun(rowsinEarnings,rowsindirectcost,rowsinadmincost,rowsinresources,columns) {
         let budget ={};
         let project = prompt('Ingrese un nombre');
@@ -446,7 +446,6 @@ export class functionsButtons {
         }
         let date = new Date();
         code += date.getFullYear().toString()+date.getMonth().toString()+date.getDate().toString()+date.getMinutes().toString()+date.getSeconds().toString()+date.getMilliseconds().toString();
-        let budget = new Budget(code);
         budget.id_presupuesto = code;
         budget.proyecto = project;
         let earnings = [];
@@ -484,7 +483,7 @@ export class functionsButtons {
         
         let result = await budget.addInfoBudget(budget,earnings,directcost,admincost,resources);
         return result;
-    }
+    }*/
     
 }
 

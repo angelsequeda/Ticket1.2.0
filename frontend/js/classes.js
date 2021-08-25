@@ -92,27 +92,52 @@ export class Budget{
     }
 
     addNewDirectcost(concept,total,month){
-        this.data.directcost.push({concept,total,month});
+        if(!frontValidations.isdataEmpty(month) && !frontValidations.isdataEmpty(total) && !frontValidations.isdataEmpty(month)){
+            try {
+                this.data.directcost.push({concept:concept,total:Number.parseFloat(total),month: month})
+            } catch (error) {
+                console.log('Revisa que tus datos sean correctos');
+            }
+        }else{
+            console.log('faltan datos');
+        }
     };
 
 
     addNewAdmincost(concept,total,month){
-        if(typeof concept === 'string' && typeof total === "number" && typeof month === "string"){
-            this.data.admincost.push({concept,total,month});
+        if(!frontValidations.isdataEmpty(month) && !frontValidations.isdataEmpty(total) && !frontValidations.isdataEmpty(month)){
+            try {
+                this.data.admincost.push({concept:concept,total:Number.parseFloat(total),month: month})
+            } catch (error) {
+                console.log('Revisa que tus datos sean correctos');
+            }
         }else{
-            throw new Error('Datos no permitidos');
+            console.log('faltan datos');
         }
     }
 
     addNewEarning(concept,total,month){
-        if(typeof concept === 'string' && typeof total === "number" && typeof month === "string"){
-            this.data.earnings.push({concept,total,month});
+        console.log(concept,total,month);
+        if(!frontValidations.isdataEmpty(month) && !frontValidations.isdataEmpty(total) && !frontValidations.isdataEmpty(month)){
+            try {
+                this.data.earnings.push({concept:concept,total:Number.parseFloat(total),month: month})
+            } catch (error) {
+                console.log('Revisa que tus datos sean correctos');
+            }
         }else{
-            throw new Error('Datos no permitidos');
+            console.log('faltan datos');
         }
     }
 
     addNewResource(concept,cost,porcentaje,month){
-        this.data.resources.push({concept,cost,porcentaje,month})
+        if(!frontValidations.isdataEmpty(month) && !frontValidations.isdataEmpty(cost) && !frontValidations.isdataEmpty(month) && !frontValidations.isdataEmpty(porcentaje)){
+            try {
+                this.data.resources.push({concept:concept,cost:Number.parseFloat(cost),month: month,porcentaje : Number.parseFloat(porcentaje)});
+            } catch (error) {
+                console.log('Revisa que tus datos sean correctos');
+            }
+        }else{
+            console.log('faltan datos');
+        }
     }
 }

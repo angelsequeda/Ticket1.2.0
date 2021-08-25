@@ -7,6 +7,7 @@ let rowsinDirectcost = 0;
 let rowsinAdmincost = 0;
 let rowsinresources = 0;
 
+import { Budget } from "./classes.js";
 import { functionsButtons} from "./index.js"
 
 
@@ -56,18 +57,19 @@ document.getElementById(`addcolumntable1`).addEventListener('click', ()=> {
 
     num+=1;
     
-
+    
     if(months2.length===0){
 
         months2=months;
-        months2=months2.slice(1);
         functionsButtons.addmonthcolumn(months2[0],num,rowsinEarnings,rowsinDirectcost,rowsinAdmincost,rowsinresources);
-
+        months3.push(months2[0])
     }else {
+        months3.push(months2[0])
         functionsButtons.addmonthcolumn(months2[0],num,rowsinEarnings,rowsinDirectcost,rowsinAdmincost,rowsinresources);
         
         months2=months2.slice(1);
     }
+
 })
 
 document.getElementById("addrowtable2").addEventListener('click', ()=> {
@@ -146,29 +148,29 @@ document.getElementById(`readytable5`).addEventListener('click', ()=> {
 })
 
 document.getElementById("buttonfinalsave").addEventListener('click',async ()=> {
-    let r = window.confirm('¿Estas seguro de que tus datos son correctos?');
-    if(r) {
 
-        console.log('bien');
-        if (rowsinDirectcost === 0 || rowsinAdmincost === 0 || rowsinresources === 0 || rowsinEarnings) {
+    let r = window.confirm('¿Seguro que los datos ingresados son correctos?');
+    if(r){
+        let project = window.prompt('Ingrese nombre del proyecto');
+        while(project.length === 0){
+            project = window.prompt('Por favor ingrese el nombre del proyecto');
+        };
+        let budget = new Budget(project);
+        for(let i = 1; i <= num; i++){
 
-            r = window.confirm('¿Seguro que desea guardar sin registrar alguno de los siguientes datos: \n Ingresos \n Costos directos \n Gastos administrativos \n Recursos?')
+            for(let j = 1; j <= rowsinEarnings; j++){
+                    budget.addNewEarning(document.getElementById(`conceptearningsinput${j}`).value,document.getElementById(`earningsinput${j}${i}`).value,months3[i-1]);
+            };
 
-            if(r) {
+            for(let j = 1; j <= rowsinDirectcost; j++){
+                budget.addNewDirectcost(document.getElementById(`conceptdirectcostinput${j}`).value,document.getElementById(`directcostinput${j}${i}`).value,months3[i-1]);
+            };
 
-                let result = await functionsButtons.saveEverythingandrun(rowsinEarnings,rowsinDirectcost,rowsinAdmincost,rowsinresources,num);
-                alert(result);
-                
-            } 
-            
-        } else {
-
-            let result = await functionsButtons.saveEverythingandrun(rowsinEarnings,rowsinDirectcost,rowsinAdmincost,rowsinresources,num);
-            alert(result);
-            window.open("../html/indexbudgin.html",'_self');
-
+            for(let j = 1; j <= rowsinAdmincost; j++){
+                budget.addNewAdmincost(document.getElementById(`conceptadmincostinput${j}`).value,document.getElementById(`admincostinput${j}${i}`).value,months3[i-1]);
+            };
         }
-        
+        console.log(budget);
     }
 })
 
