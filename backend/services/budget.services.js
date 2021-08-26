@@ -153,7 +153,7 @@ class budgetServices {
 
     static async getAllBudgetsService(){
         try {
-            let result = await budgetModel.findAll();
+            let result = await budgetModel.findAll({where:{active:1}});
             return result;
         } catch (error) {
             console.log(error.message);

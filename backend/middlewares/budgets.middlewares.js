@@ -9,6 +9,7 @@ class budgetsMiddlewares{
     static isBudgetOk (req,res,next){
 
         try {
+            console.log(req.body);
             Joi.attempt(req.body,budgetDTO);
             next();
         } catch (error) {

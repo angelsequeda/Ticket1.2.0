@@ -94,12 +94,15 @@ export class Budget{
     addNewDirectcost(concept,total,month){
         if(!frontValidations.isdataEmpty(month) && !frontValidations.isdataEmpty(total) && !frontValidations.isdataEmpty(month)){
             try {
-                this.data.directcost.push({concept:concept,total:Number.parseFloat(total),month: month})
+                this.data.directcost.push({concept:concept,total:Number.parseFloat(total),month: month});
+                return true;
             } catch (error) {
                 console.log('Revisa que tus datos sean correctos');
+                return false;
             }
         }else{
             console.log('faltan datos');
+            return false;
         }
     };
 
@@ -107,25 +110,31 @@ export class Budget{
     addNewAdmincost(concept,total,month){
         if(!frontValidations.isdataEmpty(month) && !frontValidations.isdataEmpty(total) && !frontValidations.isdataEmpty(month)){
             try {
-                this.data.admincost.push({concept:concept,total:Number.parseFloat(total),month: month})
+                this.data.admincost.push({concept:concept,total:Number.parseFloat(total),month: month});
+                return true;
             } catch (error) {
                 console.log('Revisa que tus datos sean correctos');
+                return false;
             }
         }else{
             console.log('faltan datos');
+            return false;
         }
     }
 
     addNewEarning(concept,total,month){
-        console.log(concept,total,month);
+        
         if(!frontValidations.isdataEmpty(month) && !frontValidations.isdataEmpty(total) && !frontValidations.isdataEmpty(month)){
             try {
-                this.data.earnings.push({concept:concept,total:Number.parseFloat(total),month: month})
+                this.data.earnings.push({concept:concept,total:Number.parseFloat(total),month: month});
+                return true;
             } catch (error) {
                 console.log('Revisa que tus datos sean correctos');
+                return false;
             }
         }else{
             console.log('faltan datos');
+            return false;
         }
     }
 
@@ -133,11 +142,14 @@ export class Budget{
         if(!frontValidations.isdataEmpty(month) && !frontValidations.isdataEmpty(cost) && !frontValidations.isdataEmpty(month) && !frontValidations.isdataEmpty(porcentaje)){
             try {
                 this.data.resources.push({concept:concept,cost:Number.parseFloat(cost),month: month,porcentaje : Number.parseFloat(porcentaje)});
+                return true;
             } catch (error) {
                 console.log('Revisa que tus datos sean correctos');
+                return false;
             }
         }else{
             console.log('faltan datos');
+            return false;
         }
     }
 }

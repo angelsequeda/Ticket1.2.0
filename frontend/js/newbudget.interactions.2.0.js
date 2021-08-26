@@ -9,6 +9,7 @@ let rowsinresources = 0;
 
 import { Budget } from "./classes.js";
 import { functionsButtons} from "./index.js"
+import { API } from "./senddata.js";
 
 
 document.getElementById('monthselect').addEventListener('change',()=> {
@@ -149,30 +150,88 @@ document.getElementById(`readytable5`).addEventListener('click', ()=> {
 
 document.getElementById("buttonfinalsave").addEventListener('click',async ()=> {
 
-    let r = window.confirm('¿Seguro que los datos ingresados son correctos?');
-    if(r){
-        let project = window.prompt('Ingrese nombre del proyecto');
-        while(project.length === 0){
-            project = window.prompt('Por favor ingrese el nombre del proyecto');
-        };
-        let budget = new Budget(project);
-        for(let i = 1; i <= num; i++){
-
-            for(let j = 1; j <= rowsinEarnings; j++){
-                    budget.addNewEarning(document.getElementById(`conceptearningsinput${j}`).value,document.getElementById(`earningsinput${j}${i}`).value,months3[i-1]);
+    if(rowsinEarnings === 0 && rowsinDirectcost === 0 && rowsinAdmincost === 0 && rowsinresources === 0){
+        alert('No puedes guardar un presupuesto sin datos');
+    }else{
+        let r = window.confirm('¿Seguro que los datos ingresados son correctos?');
+        if(r){
+            let project = window.prompt('Ingrese nombre del proyecto');
+            while(project.length === 0){
+                project = window.prompt('Por favor ingrese el nombre del proyecto');
             };
-
-            for(let j = 1; j <= rowsinDirectcost; j++){
-                budget.addNewDirectcost(document.getElementById(`conceptdirectcostinput${j}`).value,document.getElementById(`directcostinput${j}${i}`).value,months3[i-1]);
-            };
-
-            for(let j = 1; j <= rowsinAdmincost; j++){
-                budget.addNewAdmincost(document.getElementById(`conceptadmincostinput${j}`).value,document.getElementById(`admincostinput${j}${i}`).value,months3[i-1]);
-            };
+            let budget = new Budget(project);
+            let ind = true;
+            for(let i = 1; i <= num; i++){
+                if(ind){
+                    for(let j = 1; j <= rowsinEarnings; j++){
+                        let result = budget.addNewEarning(document.getElementById(`conceptearningsinput${j}`).value,document.getElementById(`earningsinput${j}${i}`).value,months3[i-1]);
+                        if(!result){
+                            document.getElementById(`earningsinput${j}${i}`).addEventListener('change',()=>{
+                                document.getElementById(`earningrow${j}`).style.background = 'none';
+                            });
+                            alert('Hay algo mal con los ingresos');
+                            document.getElementById(`earningrow${j}`).style.background = 'red';
+                            ind = false;
+                            break;
+                        }
+                    };
+        
+                    for(let j = 1; j <= rowsinDirectcost; j++){
+                        let result = budget.addNewDirectcost(document.getElementById(`conceptdirectcostinput${j}`).value,document.getElementById(`directcostinput${j}${i}`).value,months3[i-1]);
+                        if(!result){
+                            document.getElementById(`directcostinput${j}${i}`).addEventListener('change',()=>{
+                                document.getElementById(`directcostrow${j}`).style.background = 'none';
+                            })
+                            alert('Hay algo mal con los costos directos');
+                            document.getElementById(`direccostrow${j}`).style.background = 'red';
+                            ind = false;
+                            break;
+                        }
+                    };
+        
+                    for(let j = 1; j <= rowsinAdmincost; j++){
+                        let result = budget.addNewAdmincost(document.getElementById(`conceptadmincostinput${j}`).value,document.getElementById(`admincostinput${j}${i}`).value,months3[i-1]);
+                        if(!result){
+                            document.getElementById(`admincostinput${j}${i}`).addEventListener('change',()=>{
+                                document.getElementById(`admincostrow${j}`).style.background = 'none';
+                            });
+                            alert('Hay algo mal con los costos administrativos');
+                            document.getElementById(`admincostrow${j}`).style.background = 'red';
+                            ind = false;
+                            break;
+                        }
+                    };
+        
+                    for(let j=1; j <= rowsinresources; j++){
+                        let result = budget.addNewResource(document.getElementById(`resourcesconceptinput${j}`).value,document.getElementById(`resourcecostinput${j}${i}`).value,document.getElementById(`resourcepercentinput${j}${i}`).value,months3[i-1]);
+                        if(!result){
+                            document.getElementById(`resourcepercentinput${j}${i}`).addEventListener('change',()=>{
+                                document.getElementById(`resourcesrow${j}`).style.background = 'none';
+                            });
+                            alert('Hay algo mal con los recursos');
+                            document.getElementById(`resourcesrow${j}`).style.background = 'red';
+                            ind = false;
+                            break;
+                        }
+                    }
+                }else{
+                    break;
+                }
+            }
+            if(ind){
+                console.log(budget);
+                let response = await new API().saveBudget(JSON.parse(sessionStorage.getItem('userActive')).token,budget);
+                console.log(response);
+                if(response.status === 200){
+                    alert('Presupuesto guardado');
+                    window.open(`../html/indexbudgin.html`,'_self');
+                }else{
+                    alert(response.message);
+                }
+            }
         }
-        console.log(budget);
     }
-})
+});
 
 document.getElementById("buttonfinalcancel").addEventListener('click', ()=> {
 

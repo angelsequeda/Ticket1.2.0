@@ -56,5 +56,36 @@ export class API{
             },
         });
         return result.json()
+    };
+
+    async saveBudget(token,budget){
+        let result = await fetch(this.address+'/budgets',{
+            method : 'POST',
+            headers : {
+                "Accept": "application/json, text/plain, */*",
+                "Content-Type": "application/json",
+                "Authorization" : token
+            },
+            body:JSON.stringify({
+               budget : budget.budget, 
+               data : budget.data
+            })
+        });
+        return result.json();
+    };
+
+    async deleteBudget(token,idBudget){
+        let result = await fetch(this.address+'/budgets',{
+            method : 'DELETE',
+            headers : {
+                "Accept": "application/json, text/plain, */*",
+                "Content-Type": "application/json",
+                "Authorization" : token
+            },
+            body:JSON.stringify({
+               budget : {idBudget}
+            })
+        });
+        return result.json();
     }
 }

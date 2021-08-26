@@ -1,4 +1,5 @@
 import { Budget } from "./classes.js";
+import { API } from "./senddata.js";
 
 export class frontValidations {
 
@@ -76,8 +77,17 @@ export class Renderizer {
             file.id = element1.idBudget;
             file.insertAdjacentHTML('afterbegin',`<td><p>${element1.id}</p></td><td><p>${element1.created}</p></td><td><p>${element1.project}</p></td><td><p>${element1.version}</p></td><td><button class ='btn btn-success' id='${element1.id}send'>Enviar</button></td><td><button class ='btn btn-info' id='${element1.id}edit'>Editar</button></td><td><button class ='btn btn-danger' id='${element1.id}delete'>Eliminar</button></td>`)
             table.appendChild(file);
-            document.getElementById(`{element1.id}delete`).addEventListener('click',async()=> {
-
+            document.getElementById(`${element1.id}delete`).addEventListener('click',async()=> {
+                let r = window.confirm('¿Seguro que desea borrar esto?');
+                if(r){
+                    let deleted = await  new API().deleteBudget(JSON.parse(sessionStorage.getItem('userActive')).token,element1.idBudget);
+                    if(deleted.status === 200){
+                        alert('Borrado');
+                        table.removeChild(file);
+                    }else{
+                        alert(deleted.message);
+                    }
+                }
             })
         });
     }
