@@ -444,56 +444,6 @@ export class functionsButtons {
             
         }
     }
-
-   
-    
-/*
-    static async saveEverythingandrun(rowsinEarnings,rowsindirectcost,rowsinadmincost,rowsinresources,columns) {
-        let budget ={};
-        let project = prompt('Ingrese un nombre');
-        while (project.length === 0) {
-            project = prompt('Ingrese un nombre');
-        }
-        let date = new Date();
-        code += date.getFullYear().toString()+date.getMonth().toString()+date.getDate().toString()+date.getMinutes().toString()+date.getSeconds().toString()+date.getMilliseconds().toString();
-        budget.id_presupuesto = code;
-        budget.proyecto = project;
-        let earnings = [];
-        let directcost = [];
-        let admincost = [];
-        let resources = [];
-        for(let i = 1; i <= columns; i++) {
-
-            for(let j = 1; j <= rowsinEarnings; j++) {
-
-                let newearning = {id_presupuesto :code, concepto: document.getElementById(`conceptearningsinput${j}`).value,mes: document.getElementById(`monthheadtable2${i}`).innerHTML, total:Number.parseFloat( document.getElementById(`earningsinput${j}${i}`).value) };
-                earnings.push(newearning);
-            }
-
-            for(let j = 1; j <= rowsindirectcost; j++) {
-                let newdirectcost = {id_presupuesto :code, concepto: document.getElementById(`conceptdirectcostinput${j}`).value,mes: document.getElementById(`monthheadtable3${i}`).innerHTML, total:Number.parseFloat( document.getElementById(`directcostinput${j}${i}`).value) };
-                directcost.push(newdirectcost);
-            }
-
-            for(let j = 1; j <= rowsinadmincost; j++) {
-
-                let newadmincost = {id_presupuesto :code, concepto: document.getElementById(`conceptadmincostinput${j}`).value,mes: document.getElementById(`monthheadtable4${i}`).innerHTML, total:Number.parseFloat( document.getElementById(`admincostinput${j}${i}`).value) };
-                admincost.push(newadmincost);
-
-            }
-
-            for(let j = 1; j <= rowsinresources; j++) {
-
-                let newresource = {id_presupuesto :code, concepto: document.getElementById(`resourcesconceptinput${j}`).value,mes: document.getElementById(`monthheadtable5${i}`).innerHTML, porcentaje:Number.parseFloat( document.getElementById(`resourcepercentinput${j}${i}`).value), costo: Number.parseFloat( document.getElementById(`resourcecostinput${j}${i}`).value)};
-                resources.push(newresource);
-
-            }
-
-        };
-        
-        let result = await budget.addInfoBudget(budget,earnings,directcost,admincost,resources);
-        return result;
-    }*/
     
 }
 
